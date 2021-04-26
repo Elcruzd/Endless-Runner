@@ -15,7 +15,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            //debug: true,
+            debug: true,
             gravity: {
                 x: 0,
                 y: 0
@@ -31,6 +31,7 @@ let game = new Phaser.Game(config);
 // set UI sizes
 let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
+let waveSpeed = 4;
 
 // reserve keyboard bindings
 let keyRIGHT, keyUP, keyDOWN;

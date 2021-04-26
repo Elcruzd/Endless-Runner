@@ -37,7 +37,7 @@ class Play extends Phaser.Scene {
         p1Swimmer.setDragY(200);
         p1Swimmer.setDepth(1);
         p1Swimmer.destroyed = false;
-        p1Swimmer.anims.play('player', true);
+        p1Swimmer.anims.play('swim', true);
 
         this.sharkGroup = this.add.group({
             runChildUpdate: true
@@ -96,6 +96,7 @@ class Play extends Phaser.Scene {
             }
             this.physics.world.collide(p1Swimmer, this.sharkGroup, this.p1SwimmerCollision, null, this);
         }
+        this.seawave.tilePositionX -= waveSpeed;
     }
 
     p1SwimmerCollision() {
