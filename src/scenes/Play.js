@@ -11,7 +11,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        this.seawave = this.add.tileSprite(0, 0, 640, 480, 'waves').setOrigin(0, 0);
+        this.seawave = this.add.tileSprite(0, 0, 640, 480, 'sea').setOrigin(0, 0);
 
         // add bgm
         this.bgm = this.sound.add('bgm', {

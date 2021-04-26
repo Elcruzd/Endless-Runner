@@ -5,7 +5,7 @@ class Load extends Phaser.Scene {
 
     preload() {
         this.load.path = './assets/';
-        this.load.image('sea', 'Endless_Runner_Waves1.png');
+        this.load.image('sea', 'Endless_Runner_Waves3.png');
         // load audio asset
         this.load.audio('bgm', 'CMPM120_BGM.wav');
         // load custom spritesheet
