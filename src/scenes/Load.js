@@ -1,3 +1,9 @@
+/* 
+** Name: Zhendong Jiang
+** Porject: Endless Runner
+** Date: April 22, 2021
+*/
+
 class Load extends Phaser.Scene {
     constructor() {
         super('loadScene');

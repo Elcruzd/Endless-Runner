@@ -1,8 +1,7 @@
 /* 
 ** Name: Zhendong Jiang
-** Porject: Rocket Patrol Mods
-** Date: April 16, 2021
-** 
+** Porject: Endless Runner
+** Date: April 22, 2021
 */
 
 class Menu extends Phaser.Scene {
@@ -30,10 +29,10 @@ class Menu extends Phaser.Scene {
 
         // show menu text
         // this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(borderX, borderY, 'Use RIGHT ARROWS to start', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Use RIGHT ARROWS to start', menuConfig).setOrigin(0.5);
         // menuConfig.backgroundColor = '#ffffff';
         // menuConfig.color = '#000';
-        this.add.text(borderX, borderY + 64*3 , 'Press UP & DOWN  ARROWS to move', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 64*3 , 'Press UP & DOWN  ARROWS to move', menuConfig).setOrigin(0.5);
         
         // define keys
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);

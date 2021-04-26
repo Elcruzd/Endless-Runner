@@ -4,10 +4,9 @@
 ** Date: April 22, 2021
 */
 
-// Rocket (player) prefab
 class Sharks extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
-        super(scene, scene.scale.width + 32, Phaser.Math.Between(scene.scale.height / 2, scene.scale.height - 32 * 2 + 5));
+        super(scene, game.config.width + 32, Phaser.Math.Between(game.config.height/2, game.config.height/2 - 32 * 2 + 5));
 
         // add object to the existing scene
         scene.add.existing(this);
@@ -20,7 +19,7 @@ class Sharks extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        if(this.newSharks && this.x < borderX) {
+        if(this.newSharks && this.x < game.config.width/2) {
             this.newSharks = false;
             this.scene.addSharks(this.velocity);
         }
