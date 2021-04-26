@@ -10,12 +10,6 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
 
-    preload() {
-        // load menu background
-        // this.load.image('menu', './assets/menubackground.jpg');
-        // load background audio
-    }
-
     create() {
         // // place menu background
         // this.add.image(0, 0, 'menu').setOrigin(0, 0);
@@ -36,17 +30,17 @@ class Menu extends Phaser.Scene {
 
         // show menu text
         // this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        // this.add.text(game.config.width/2, game.config.height/2, 'Use ← → arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
+        this.add.text(borderX, borderY, 'Use RIGHT ARROWS to start', menuConfig).setOrigin(0.5);
         // menuConfig.backgroundColor = '#ffffff';
         // menuConfig.color = '#000';
-        // this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+        this.add.text(borderX, borderY + 64*3 , 'Press UP & DOWN  ARROWS to move', menuConfig).setOrigin(0.5);
         
         // define keys
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
             this.scene.start('playScene');
         }
     }

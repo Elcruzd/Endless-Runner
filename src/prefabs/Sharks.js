@@ -5,21 +5,25 @@
 */
 
 // Rocket (player) prefab
-class Sharks extends Phaser.GameObjects.Arcade.Sprite {
-    constructor(scene, x, y, texture, frame) {
-        super(scene, x, y, texture, frame);
+class Sharks extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, velocity) {
+        super(scene, scene.scale.width + 32, Phaser.Math.Between(scene.scale.height / 2, scene.scale.height - 32 * 2 + 5));
 
         // add object to the existing scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.setVelocityX(velocity);
+        this.setImmovable();
         //this.moveSpeed = 2;         // pixels per frame
-        this.tint = Math.random();
+        this.tint = Math.random() * 0xFFFFFF;
         this.newSharks = true;
-
-        //this.sfxRocket = scene.sound.add('sfx_rocket');     // add rocket sfx
     }
 
     update() {
+        if(this.newSharks && this.x < borderX) {
+            this.newSharks = false;
+            this.scene.addSharks(this.velocity);
+        }
         if(this.x < -this.width) {
             this.destroy();
         }
