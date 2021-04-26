@@ -14,7 +14,6 @@ class Menu extends Phaser.Scene {
         // load menu background
         // this.load.image('menu', './assets/menubackground.jpg');
         // load background audio
-        this.load.audio('bgm', './assets/CMPM120_BGM.wav');
     }
 
     create() {
@@ -43,17 +42,12 @@ class Menu extends Phaser.Scene {
         // this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
         
         // define keys
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-
-        // add bm
-        let backgroundMusic = this.sound.add('bm');
-        // looping bm
-        backgroundMusic.loop = true;
-        backgroundMusic.play();
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     }
 
     update() {
-        
+        if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.scene.start('playScene');
+        }
     }
 }

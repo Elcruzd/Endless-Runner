@@ -49,6 +49,14 @@ class Play extends Phaser.Scene {
         // this.add.rectangle(0, 0, borderUISize, game.config.height, 0x21130D).setOrigin(0, 0);
         // this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0x21130D).setOrigin(0, 0);
 
+        // add bgm
+        this.backgroundMusic = this.sound.add('bgm', {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            loop: true 
+        });
+        backgroundMusic.play();
         // add rocket (player 1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
 

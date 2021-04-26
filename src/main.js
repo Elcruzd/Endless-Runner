@@ -47,7 +47,7 @@ let borderPadding = borderUISize / 3;
 let starSpeed = 4;
 
 // reserve keyboard bindings
-let keyUP, keyDOWN;
+let keyLEFT, keyUP, keyDOWN;
 
 // initialize high score
 let p1HighScore = 0;
