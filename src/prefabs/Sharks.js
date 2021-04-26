@@ -6,7 +6,7 @@
 
 class Sharks extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
-        super(scene, game.config.width + 32, Phaser.Math.Between(game.config.height/2, game.config.height/2 - 32 * 2 + 5));
+        super(scene, game.config.width + 32, Phaser.Math.Between(128/2, game.config.height - 128/2), 'sharks');
 
         // add object to the existing scene
         scene.add.existing(this);

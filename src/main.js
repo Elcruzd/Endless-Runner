@@ -40,3 +40,4 @@ let p1HighScore = 0;
 
 let p1Swimmer = null;
 let p1SwimmerVelocity = 150;
+let level;

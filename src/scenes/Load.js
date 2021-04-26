@@ -15,21 +15,43 @@ class Load extends Phaser.Scene {
         // load audio asset
         this.load.audio('bgm', 'CMPM120_BGM.wav');
         // load custom spritesheet
-        this.load.spritesheet('player', 'Swim_animation.png', {
+        this.load.spritesheet('player', 'rocket1.png', {
             frameWidth: 32,
             frameHeight: 32,
             startFrame: 0,
-            endFrame: 7
+            endFrame: 3
         });
-        this.load.spritesheet('sharks', 'SHARK.png', {
+        this.load.spritesheet('sharks', 'spaceship1.png', {
             frameWidth: 64,
             frameHeight: 32,
             startFrame: 0,
-            endFrame: 2
+            endFrame: 3
         });
     }
 
     create() {
+        // animation config
+        this.anims.create({
+            key: 'swim',
+            frames: this.anims.generateFrameNumbers('player', {
+                start: 0,
+                end: 3,
+                first: 0
+            }),
+            repeat: -1,
+            frameRate: 20
+        });
+        this.anims.create({
+            key: 'swimShark',
+            frames: this.anims.generateFrameNumbers('sharks', {
+                start: 0,
+                end: 3,
+                first: 0
+            }),
+            repeat: -1,
+            frameRate: 20
+        });
+
         this.scene.start('menuScene');
     }
 }
