@@ -1,7 +1,10 @@
 /* 
-** Name: Zhendong Jiang
+** Name: Zhendong Jiang - programming, game design
+**       Nathan Pon - art, audio assets
+**       Jiahui Li - art, audio assets
 ** Porject: Endless Runner
-** Date: April 22, 2021
+** Game Title: Sharkbu-Sharkbu
+** Date: May 3, 2021
 */
 
 class Play extends Phaser.Scene {
@@ -10,34 +13,32 @@ class Play extends Phaser.Scene {
     }
 
     init() {
+        this.sharkSpeed = -450;
+        this.sharkMaxSpeed = -1000;
+        // this.
         this.gameOver = false;
     }
 
     create() {
         this.seawave = this.add.tileSprite(0, 0, 640, 480, 'sea').setOrigin(0, 0);
 
-        this.sharkSpeed = -450;
-        this.sharkMaxSpeed = -1000;
-        level = 0;
-        this.extremeMode = false;
-        this.shadowLock = false;
-
         // add bgm
         this.bgm = this.sound.add('bgm', {
             mute: false,
-            volume: 1,
-            rate: 1,
+            volume: 3,
+            rate: 1.5,
             loop: true 
         });
         this.bgm.play();
 
         p1Swimmer = this.physics.add.sprite(64, game.config.height/2, 'player').setOrigin(0.5, 0.5);
-        p1Swimmer.setSize(105, 105);
-        p1Swimmer.setOffset(0, 0);
+        p1Swimmer.setSize(105, 50);
+        p1Swimmer.setOffset(0, 20);
+        p1Swimmer.body.setCollideWorldBounds(true);
+        p1Swimmer.setBounce(0.5);
         p1Swimmer.setImmovable();
         p1Swimmer.setMaxVelocity(0, 300);
-        p1Swimmer.setDragY(200);
-        p1Swimmer.setDepth(1);
+        p1Swimmer.setDragY(500);
         p1Swimmer.destroyed = false;
         p1Swimmer.anims.play('player', true);
 
@@ -49,25 +50,29 @@ class Play extends Phaser.Scene {
             this.addSharks();
         });
 
+        this.whaleGroup = this.add.group({
+            runChildUpdate: true
+        });
+        this.time.delayedCall(1500, () => {
+            this.addWhale();
+        });
+        this.itemGroup = this.add.group({
+            runChildUpdate: true
+        })
+
         // display time
-        // this.gameTimer = this.time.addEvent({
-        //     delay: 1000,
-        //     callback: this,
-        //     callbackScope: this,
-        //     loop: true
-        // });
-        // let timeConfig = {
-        //     fontFamily: 'Courier',
-        //     fontSize: '28px',
-        //     color: '#FFFFFF',
-        //     align: 'right',
-        //     padding: {
-        //         top: 5,
-        //         bottom: 5,
-        //     },
-        //     fixedWidth: 100
-        // }
-        // this.timeDisplay = this.add.text(game.config.width / 2, 10, 'Time: ' + this.game.time.totalElapsedSeconds(), timeConfig).setOrigin(0.5, 0);
+        let timeConfig = {
+            fontFamily: 'Chuck',
+            fontSize: '28px',
+            color: '#black',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.timeDisplay = this.add.text(20, 20, 'Time: ' + gameTime, timeConfig).setOrigin(0.5, 0);
         cursors = this.input.keyboard.createCursorKeys();
     }
 
@@ -77,9 +82,15 @@ class Play extends Phaser.Scene {
         this.sharkGroup.add(sharks);
     }
 
+    addWhale() {
+        let whaleMoveSpeed = Phaser.Math.Between(0, 50);
+        let whales = new Whale(this, this.whaleSpeed - whaleMoveSpeed);
+        this.whaleGroup.add(whales);
+    }
+
     update(time, delta) {
         let deltaMultiplier = (delta/16.6666667);
-        this.seawave.tilePositionX += (waveSpeed/2) * deltaMultiplier;
+        this.seawave.tilePositionX += (waveSpeed) * deltaMultiplier;
         if(!p1Swimmer.destroyed) {
             if(cursors.up.isDown) {
                 p1Swimmer.body.velocity.y -= p1SwimmerVelocity;
@@ -88,6 +99,18 @@ class Play extends Phaser.Scene {
             }
             this.physics.world.collide(p1Swimmer, this.sharkGroup, this.p1SwimmerCollision, null, this);
         }
+        if(!this.gameOver) {
+            p1Swimmer.update();
+        }
+        // if(this.gameOver) {
+
+        // }
+        this.increaseTime(delta);
+    }
+
+    increaseTime(delta) {
+        gameTime += delta;
+        this.timeDisplay.text = Math.round(gameTime/100) / 10;
     }
 
     p1SwimmerCollision() {
@@ -95,7 +118,7 @@ class Play extends Phaser.Scene {
         let p1Death = this.add.sprite(p1Swimmer.x, p1Swimmer.y, 'bloodExplode').setOrigin(0, 0);
         p1Death.anims.play('bloods');
         this.sound.play('death', { 
-            volume: 0.25 
+            volume: 1 
         });
         p1Death.on('animationcomplete', () => {
             p1Death.destroy();

@@ -1,7 +1,10 @@
 /* 
-** Name: Zhendong Jiang
+** Name: Zhendong Jiang - programming, game design
+**       Nathan Pon - art, audio assets
+**       Jiahui Li - art, audio assets
 ** Porject: Endless Runner
-** Date: April 22, 2021
+** Game Title: Sharkbu-Sharkbu
+** Date: May 3, 2021
 */
 
 // game configuration
@@ -28,16 +31,14 @@ let config = {
 // define game
 let game = new Phaser.Game(config);
 
-// set UI sizes
+// define golbal
 let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 let waveSpeed = 4;
 let cursors;
-
-// initialize high score
-let p1HighScore = 0;
-
 let p1Swimmer = null;
-let shark01;
-let p1SwimmerVelocity = 150;
-let level;
+const p1SwimmerVelocity = 150;
+// initialize score and high score
+let gameTime = 0;
+let p1HighScore = 0;
+let newHighScore = false;

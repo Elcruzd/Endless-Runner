@@ -1,7 +1,10 @@
 /* 
-** Name: Zhendong Jiang
+** Name: Zhendong Jiang - programming, game design
+**       Nathan Pon - art, audio assets
+**       Jiahui Li - art, audio assets
 ** Porject: Endless Runner
-** Date: April 22, 2021
+** Game Title: Sharkbu-Sharkbu
+** Date: May 3, 2021
 */
 
 class Load extends Phaser.Scene {
@@ -11,12 +14,17 @@ class Load extends Phaser.Scene {
 
     preload() {
         this.load.path = './assets/';
+        // load images asset
         this.load.image('menuBackground', 'menu1.png');
-        this.load.image('sea', 'background_2.png');
-        this.load.image('sharks', 'Orca.png')
+        this.load.image('logo', 'Game_Logo_2.png');
+        this.load.image('sea', 'background.png');
+        this.load.image('sharks', 'SHARK_new.png');
+        this.load.image('whales', 'Orca.png');
+        this.load.image('items', 'Surfboard.png');
         // load audio asset
         this.load.audio('bgm', 'CMPM120_BGM.wav');
         this.load.audio('death', 'dead.wav');
+        this.load.audio('over', 'Game_Over_1.wav');
         // load custom spritesheet
         this.load.spritesheet('swim', 'Swim_animation_2_320_x_320.png', {
             frameWidth: 105,

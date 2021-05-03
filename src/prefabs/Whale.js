@@ -7,9 +7,9 @@
 ** Date: May 3, 2021
 */
 
-class Sharks extends Phaser.Physics.Arcade.Sprite {
+class Whale extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
-        super(scene, game.config.width + 32, Phaser.Math.Between(128/2, game.config.height - 128/2), 'sharks');
+        super(scene, game.config.width + 64, Phaser.Math.Between(128, game.config.height - 128), 'whales');
 
         // add object to the existing scene
         scene.add.existing(this);
