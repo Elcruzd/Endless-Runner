@@ -10,15 +10,14 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        // // place menu background
-        // this.add.image(0, 0, 'menu').setOrigin(0, 0);
-
+        // place menu background
+        this.add.image(0, 0, 'menuBackground').setOrigin(0, 0);
+        
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3b141',
-            color: '#843605',
+            color: '#FFFFFF',
             align: 'right',
             padding: {
                 top: 5,
@@ -28,19 +27,17 @@ class Menu extends Phaser.Scene {
         }
 
         // show menu text
-        // this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use RIGHT ARROWS to start', menuConfig).setOrigin(0.5);
-        // menuConfig.backgroundColor = '#ffffff';
-        // menuConfig.color = '#000';
-        this.add.text(game.config.width/2, game.config.height/2 + 64*3 , 'Press UP & DOWN  ARROWS to move', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Click to Play', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 64 , 'Press UP & DOWN  ARROWS to move', menuConfig).setOrigin(0.5);
         
         // define keys
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        // cursors = this.input.keyboard.createCursorKeys();
+        this.input.on('pointerdown', () => this.scene.start('playScene'));
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-            this.scene.start('playScene');
-        }
+    //     if(cursors.right.isDown) {
+    //         this.scene.start('playScene');
+    //     }
     }
 }

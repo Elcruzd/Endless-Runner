@@ -11,45 +11,47 @@ class Load extends Phaser.Scene {
 
     preload() {
         this.load.path = './assets/';
-        this.load.image('sea', 'Endless_Runner_Waves3.png');
+        this.load.image('menuBackground', 'menu1.png');
+        this.load.image('sea', 'background_2.png');
+        this.load.image('sharks', 'Orca.png')
         // load audio asset
         this.load.audio('bgm', 'CMPM120_BGM.wav');
+        this.load.audio('death', 'dead.wav');
         // load custom spritesheet
-        this.load.spritesheet('player', 'rocket1.png', {
-            frameWidth: 32,
-            frameHeight: 32,
+        this.load.spritesheet('swim', 'Swim_animation_2_320_x_320.png', {
+            frameWidth: 105,
+            frameHeight: 105,
             startFrame: 0,
-            endFrame: 3
+            endFrame: 7
         });
-        this.load.spritesheet('sharks', 'spaceship1.png', {
+        this.load.spritesheet('bloodExplode', 'blood.png', {
             frameWidth: 64,
             frameHeight: 32,
             startFrame: 0,
-            endFrame: 3
+            endFrame: 9
         });
     }
 
     create() {
         // animation config
         this.anims.create({
-            key: 'swim',
-            frames: this.anims.generateFrameNumbers('player', {
+            key: 'player',
+            frames: this.anims.generateFrameNumbers('swim', {
                 start: 0,
-                end: 3,
+                end: 7,
                 first: 0
             }),
             repeat: -1,
-            frameRate: 20
+            frameRate: 10
         });
         this.anims.create({
-            key: 'swimShark',
-            frames: this.anims.generateFrameNumbers('sharks', {
+            key: 'bloods',
+            frames: this.anims.generateFrameNumbers('bloodExplode', {
                 start: 0,
-                end: 3,
+                end: 9,
                 first: 0
             }),
-            repeat: -1,
-            frameRate: 20
+            frameRate: 30
         });
 
         this.scene.start('menuScene');

@@ -22,7 +22,7 @@ let config = {
             }
         }
     },
-    scene: [ Load, Menu, Play ]
+    scene: [ Load, Menu, Play, End ]
 }
 
 // define game
@@ -32,13 +32,12 @@ let game = new Phaser.Game(config);
 let borderUISize = game.config.height / 20;
 let borderPadding = borderUISize / 3;
 let waveSpeed = 4;
-
-// reserve keyboard bindings
-let keyRIGHT, keyUP, keyDOWN;
+let cursors;
 
 // initialize high score
 let p1HighScore = 0;
 
 let p1Swimmer = null;
+let shark01;
 let p1SwimmerVelocity = 150;
 let level;

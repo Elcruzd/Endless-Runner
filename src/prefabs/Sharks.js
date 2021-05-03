@@ -13,11 +13,11 @@ class Sharks extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         this.setVelocityX(velocity);
         this.setImmovable();
-        //this.moveSpeed = 2;         // pixels per frame
         this.tint = Math.random() * 0xFFFFFF;
         this.newSharks = true;
+        // this.anims.play('sharks');
     }
-
+    
     update() {
         if(this.newSharks && this.x < game.config.width/2) {
             this.newSharks = false;

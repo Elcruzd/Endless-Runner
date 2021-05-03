@@ -9,6 +9,10 @@ class Play extends Phaser.Scene {
         super("playScene");
     }
 
+    init() {
+        this.gameOver = false;
+    }
+
     create() {
         this.seawave = this.add.tileSprite(0, 0, 640, 480, 'sea').setOrigin(0, 0);
 
@@ -27,17 +31,15 @@ class Play extends Phaser.Scene {
         });
         this.bgm.play();
 
-        // define keys
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        
-        p1Swimmer = this.physics.add.sprite(32, game.config.height/2, 'player').setOrigin(0.5);
+        p1Swimmer = this.physics.add.sprite(64, game.config.height/2, 'player').setOrigin(0.5, 0.5);
+        p1Swimmer.setSize(105, 105);
+        p1Swimmer.setOffset(0, 0);
         p1Swimmer.setImmovable();
-        p1Swimmer.setMaxVelocity(0, 600);
+        p1Swimmer.setMaxVelocity(0, 300);
         p1Swimmer.setDragY(200);
         p1Swimmer.setDepth(1);
         p1Swimmer.destroyed = false;
-        p1Swimmer.anims.play('swim', true);
+        p1Swimmer.anims.play('player', true);
 
         this.sharkGroup = this.add.group({
             runChildUpdate: true
@@ -47,38 +49,26 @@ class Play extends Phaser.Scene {
             this.addSharks();
         });
 
-        // initialize score
-        this.p1Score = 0;
-
-        // display score
-        let scoreConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3b141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-
-        // display high score
-        let highScoreConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3b141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-        this.highScoreLeft = this.add.text(borderUISize + borderPadding*45.5, borderUISize + borderPadding*2, p1HighScore, highScoreConfig);
+        // display time
+        // this.gameTimer = this.time.addEvent({
+        //     delay: 1000,
+        //     callback: this,
+        //     callbackScope: this,
+        //     loop: true
+        // });
+        // let timeConfig = {
+        //     fontFamily: 'Courier',
+        //     fontSize: '28px',
+        //     color: '#FFFFFF',
+        //     align: 'right',
+        //     padding: {
+        //         top: 5,
+        //         bottom: 5,
+        //     },
+        //     fixedWidth: 100
+        // }
+        // this.timeDisplay = this.add.text(game.config.width / 2, 10, 'Time: ' + this.game.time.totalElapsedSeconds(), timeConfig).setOrigin(0.5, 0);
+        cursors = this.input.keyboard.createCursorKeys();
     }
 
     addSharks() {
@@ -87,20 +77,34 @@ class Play extends Phaser.Scene {
         this.sharkGroup.add(sharks);
     }
 
-    update() {
+    update(time, delta) {
+        let deltaMultiplier = (delta/16.6666667);
+        this.seawave.tilePositionX += (waveSpeed/2) * deltaMultiplier;
         if(!p1Swimmer.destroyed) {
-            if(Phaser.Input.Keyboard.JustDown(keyUP)) {
+            if(cursors.up.isDown) {
                 p1Swimmer.body.velocity.y -= p1SwimmerVelocity;
-            } else if(Phaser.Input.Keyboard.JustDown(keyDOWN)) {
+            } else if(cursors.down.isDown) {
                 p1Swimmer.body.velocity.y += p1SwimmerVelocity;
             }
             this.physics.world.collide(p1Swimmer, this.sharkGroup, this.p1SwimmerCollision, null, this);
         }
-        this.seawave.tilePositionX -= waveSpeed;
     }
 
     p1SwimmerCollision() {
         p1Swimmer.destroyed = true;
-        p1Swimmer.destory();
+        let p1Death = this.add.sprite(p1Swimmer.x, p1Swimmer.y, 'bloodExplode').setOrigin(0, 0);
+        p1Death.anims.play('bloods');
+        this.sound.play('death', { 
+            volume: 0.25 
+        });
+        p1Death.on('animationcomplete', () => {
+            p1Death.destroy();
+        });
+        this.time.delayedCall(10, () => {
+            p1Swimmer.destroy();
+        });
+        this.time.delayedCall(1000, () => {
+            this.scene.start('endScene');
+        });
     }
 }
