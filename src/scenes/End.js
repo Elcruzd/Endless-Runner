@@ -13,19 +13,19 @@ class End extends Phaser.Scene {
     }
 
     create() {
-        if(localStorage.getItem('timeData') != null) {
-            let storedTime = parseInt(localStorage.getItem('timeData'));
-            if(gameTime > storedTime) {
-                localStorage.setItem('timeData', gameTime.toString());
-                p1HighScore = gameTime;
+        if(localStorage.getItem('highscore') != null) {
+            let storedTime = parseInt(localStorage.getItem('highscore'));
+            if(p1Score > storedTime) {
+                localStorage.setItem('highscore', p1Score.toString());
+                p1HighScore = p1Score;
                 newHighScore = true;
             } else {
-                p1HighScore = parseInt(localStorage.getItem('timeData'));
+                p1HighScore = parseInt(localStorage.getItem('highscore'));
                 newHighScore = false;
             }
         } else {
-            p1HighScore = gameTime;
-            localStorage.setItem('timeData', p1HighScore.toString());
+            p1HighScore = p1Score;
+            localStorage.setItem('highscore', p1HighScore.toString());
             newHighScore = true;
         }
         let endConfig = {
@@ -39,10 +39,8 @@ class End extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-        if(newHighScore) {
-            this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 64, 'Your Score: ' + gameTime, endConfig).setOrigin(0.5);
-        }
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 96, 'High Score: ', + p1HighScore, endConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 64, `Your Score: ${p1Score}s`, endConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 96, `High Score: ${p1HighScore}s`, endConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'GAME OVER', endConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 128, 'Press SPACE to Restart', endConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 160, 'Press LEFT Arrow for Menu', endConfig).setOrigin(0.5);

@@ -12,15 +12,12 @@ class Play extends Phaser.Scene {
         super("playScene");
     }
 
-    init() {
-        this.sharkSpeed = -450;
-        this.sharkMaxSpeed = -1000;
-        // this.
-        this.gameOver = false;
-    }
-
     create() {
         this.seawave = this.add.tileSprite(0, 0, 640, 480, 'sea').setOrigin(0, 0);
+
+        this.sharkSpeed = -500;
+        this.sharkMaxSpeed = -1500;
+        p1Score = 0;
 
         // add bgm
         this.bgm = this.sound.add('bgm', {
@@ -56,11 +53,17 @@ class Play extends Phaser.Scene {
         this.time.delayedCall(1500, () => {
             this.addWhale();
         });
-        this.itemGroup = this.add.group({
-            runChildUpdate: true
-        })
+        // this.itemGroup = this.add.group({
+        //     runChildUpdate: true
+        // })
 
         // display time
+        this.passTimer = this.time.addEvent({
+            delay: 1000,
+            callback: this.timeIncrease,
+            callbackScope: this,
+            loop: true
+        })
         let timeConfig = {
             fontFamily: 'Chuck',
             fontSize: '28px',
@@ -72,7 +75,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.timeDisplay = this.add.text(20, 20, 'Time: ' + gameTime, timeConfig).setOrigin(0.5, 0);
+        this.timeDisplay = this.add.text(game.config.width/2, game.config.height/2 - 240, `Time: ${p1Score}s`, timeConfig).setOrigin(0.5, 0);
         cursors = this.input.keyboard.createCursorKeys();
     }
 
@@ -83,7 +86,7 @@ class Play extends Phaser.Scene {
     }
 
     addWhale() {
-        let whaleMoveSpeed = Phaser.Math.Between(0, 50);
+        let whaleMoveSpeed = Phaser.Math.Between(25, 25);
         let whales = new Whale(this, this.whaleSpeed - whaleMoveSpeed);
         this.whaleGroup.add(whales);
     }
@@ -99,19 +102,23 @@ class Play extends Phaser.Scene {
             }
             this.physics.world.collide(p1Swimmer, this.sharkGroup, this.p1SwimmerCollision, null, this);
         }
-        if(!this.gameOver) {
-            p1Swimmer.update();
+        // this.increaseTime(delta);
+    }
+
+    timeIncrease() {
+        p1Score += 1;
+        this.timeDisplay.text = `Time: ${p1Score}s`;
+        if(p1Score % 5 == 0) {
+            console.log(`level: ${p1Score}, speed: ${this.sharkSpeed}`);
+            if(this.sharkSpeed >= this.sharkMaxSpeed) {
+                this.sharkSpeed -= 50;
+            }
         }
-        // if(this.gameOver) {
-
-        // }
-        this.increaseTime(delta);
     }
-
-    increaseTime(delta) {
-        gameTime += delta;
-        this.timeDisplay.text = Math.round(gameTime/100) / 10;
-    }
+    // increaseTime(delta) {
+    //     gameTime += delta;
+    //     this.timeDisplay.text = Math.round(gameTime/100) / 10;
+    // }
 
     p1SwimmerCollision() {
         p1Swimmer.destroyed = true;

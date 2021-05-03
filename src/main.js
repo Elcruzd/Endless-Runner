@@ -27,7 +27,7 @@ let config = {
     },
     scene: [ Load, Menu, Play, End ]
 }
-
+// localStorage.clear();
 // define game
 let game = new Phaser.Game(config);
 
@@ -37,8 +37,8 @@ let borderPadding = borderUISize / 3;
 let waveSpeed = 4;
 let cursors;
 let p1Swimmer = null;
-const p1SwimmerVelocity = 150;
+const p1SwimmerVelocity = 200;
 // initialize score and high score
-let gameTime = 0;
+let p1Score;
 let p1HighScore = 0;
 let newHighScore = false;
