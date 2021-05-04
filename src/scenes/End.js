@@ -52,10 +52,24 @@ class End extends Phaser.Scene {
     update() {
         if(Phaser.Input.Keyboard.JustDown(cursors.space)) {
             this.sound.stopAll();
+            this.selectSound = this.sound.add('select', {
+                mute: false,
+                volume: 1,
+                rate: 1,
+                loop: false 
+            });
+            this.selectSound.play();
             this.scene.start('playScene');
         }
         if(Phaser.Input.Keyboard.JustDown(cursors.left)) {
             this.sound.stopAll();
+            this.selectSound = this.sound.add('select', {
+                mute: false,
+                volume: 1,
+                rate: 1,
+                loop: false 
+            });
+            this.selectSound.play();
             this.scene.start('menuScene');
         }
     }

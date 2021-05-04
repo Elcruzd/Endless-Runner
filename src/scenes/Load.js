@@ -17,11 +17,13 @@ class Load extends Phaser.Scene {
         // load images asset
         this.load.image('menuBackground', 'menu1.png');
         this.load.image('logo', 'Game_Logo_2.png');
-        this.load.image('sea', 'background.png');
+        this.load.image('sea', 'background2.png');
+        this.load.image('sea2', 'background3.png');
         this.load.image('sharks', 'SHARK_new.png');
         this.load.image('whales', 'Orca.png');
         this.load.image('items', 'Surfboard.png');
         // load audio asset
+        this.load.audio('select', 'select.wav');
         this.load.audio('bgm', 'CMPM120_BGM.wav');
         this.load.audio('death', 'dead.wav');
         this.load.audio('over', 'Game_Over_1.wav');

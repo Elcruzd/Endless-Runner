@@ -14,9 +14,12 @@ class Play extends Phaser.Scene {
 
     create() {
         this.seawave = this.add.tileSprite(0, 0, 640, 480, 'sea').setOrigin(0, 0);
+        this.seawave02 = this.add.tileSprite(0, 0, 640, 480, 'sea2').setOrigin(0, 0);
 
         this.sharkSpeed = -500;
         this.sharkMaxSpeed = -1500;
+        this.whaleSpeed = -300;
+        this.whaleMaxSpeed = -600;
         p1Score = 0;
 
         // add bgm
@@ -29,8 +32,8 @@ class Play extends Phaser.Scene {
         this.bgm.play();
 
         p1Swimmer = this.physics.add.sprite(64, game.config.height/2, 'player').setOrigin(0.5, 0.5);
-        p1Swimmer.setSize(105, 50);
-        p1Swimmer.setOffset(0, 20);
+        p1Swimmer.setSize(128, 32);
+        p1Swimmer.setOffset(-8, 32);
         p1Swimmer.body.setCollideWorldBounds(true);
         p1Swimmer.setBounce(0.5);
         p1Swimmer.setImmovable();
@@ -50,12 +53,9 @@ class Play extends Phaser.Scene {
         this.whaleGroup = this.add.group({
             runChildUpdate: true
         });
-        this.time.delayedCall(1500, () => {
+        this.time.delayedCall(10000, () => {
             this.addWhale();
         });
-        // this.itemGroup = this.add.group({
-        //     runChildUpdate: true
-        // })
 
         // display time
         this.passTimer = this.time.addEvent({
@@ -86,14 +86,15 @@ class Play extends Phaser.Scene {
     }
 
     addWhale() {
-        let whaleMoveSpeed = Phaser.Math.Between(25, 25);
+        let whaleMoveSpeed = Phaser.Math.Between(0, 20);
         let whales = new Whale(this, this.whaleSpeed - whaleMoveSpeed);
         this.whaleGroup.add(whales);
     }
 
     update(time, delta) {
-        let deltaMultiplier = (delta/16.6666667);
-        this.seawave.tilePositionX += (waveSpeed) * deltaMultiplier;
+        let deltaMultiplier = (delta/16);
+        // this.seawave.tilePositionX += (waveSpeed) * deltaMultiplier;
+        this.seawave02.tilePositionX += (waveSpeed) * deltaMultiplier;
         if(!p1Swimmer.destroyed) {
             if(cursors.up.isDown) {
                 p1Swimmer.body.velocity.y -= p1SwimmerVelocity;
@@ -101,8 +102,8 @@ class Play extends Phaser.Scene {
                 p1Swimmer.body.velocity.y += p1SwimmerVelocity;
             }
             this.physics.world.collide(p1Swimmer, this.sharkGroup, this.p1SwimmerCollision, null, this);
+            this.physics.world.collide(p1Swimmer, this.whaleGroup, this.p1SwimmerCollision, null, this);
         }
-        // this.increaseTime(delta);
     }
 
     timeIncrease() {
@@ -115,10 +116,6 @@ class Play extends Phaser.Scene {
             }
         }
     }
-    // increaseTime(delta) {
-    //     gameTime += delta;
-    //     this.timeDisplay.text = Math.round(gameTime/100) / 10;
-    // }
 
     p1SwimmerCollision() {
         p1Swimmer.destroyed = true;

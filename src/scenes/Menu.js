@@ -34,13 +34,20 @@ class Menu extends Phaser.Scene {
         this.playButton = this.add.text(game.config.width/2, game.config.height/2, 'Click to Play', menuConfig).setOrigin(0.5);
         this.playButton.setInteractive();
         this.playButton.on('pointerdown', () => {
+            this.selectSound = this.sound.add('select', {
+                mute: false,
+                volume: 1,
+                rate: 1,
+                loop: false 
+            });
+            this.selectSound.play();
             this.scene.start('playScene');
         })
         this.add.text(game.config.width/2, game.config.height/2 + 64 , 'Press UP & DOWN  ARROWS to move', menuConfig).setOrigin(0.5);
         
         // define keys
         // cursors = this.input.keyboard.createCursorKeys();
-        this.input.on('pointerdown', () => this.scene.start('playScene'));
+        // this.input.on('pointerdown', () => this.scene.start('playScene'));
     }
 
     update() {

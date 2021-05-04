@@ -14,7 +14,8 @@ class Whale extends Phaser.Physics.Arcade.Sprite {
         // add object to the existing scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.setSize(50, 50);
+        this.setSize(128, 64);
+        this.setOffset(32, -8);
         this.setVelocityX(velocity);
         this.setImmovable();
         this.newWhale = true;
