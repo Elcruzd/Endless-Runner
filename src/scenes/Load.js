@@ -18,15 +18,18 @@ class Load extends Phaser.Scene {
         this.load.image('menuBackground', 'menu1.png');
         this.load.image('logo', 'Game_Logo_2.png');
         this.load.image('sea', 'background2.png');
-        this.load.image('sea2', 'background3.png');
+        this.load.image('sea1', 'background_2.png');
+        this.load.image('sea2', 'background4.png');
         this.load.image('sharks', 'SHARK_new.png');
         this.load.image('whales', 'Orca.png');
         this.load.image('items', 'Surfboard.png');
+        this.load.image('over', 'gameover.png');
         // load audio asset
         this.load.audio('select', 'select.wav');
         this.load.audio('bgm', 'CMPM120_BGM.wav');
         this.load.audio('death', 'dead.wav');
         this.load.audio('over', 'Game_Over_1.wav');
+        this.load.audio('pickup', 'pickup.wav');
         // load custom spritesheet
         this.load.spritesheet('swim', 'Swim_animation_2_320_x_320.png', {
             frameWidth: 105,
@@ -64,6 +67,6 @@ class Load extends Phaser.Scene {
             frameRate: 30
         });
 
-        this.scene.start('menuScene');
+        this.scene.start('menuScene');  // move to menu scene
     }
 }

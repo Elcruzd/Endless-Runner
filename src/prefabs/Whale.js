@@ -9,11 +9,10 @@
 
 class Whale extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
+        // call Phaser Physics Sprite constructor
         super(scene, game.config.width + 32, Phaser.Math.Between(128/2, game.config.height - 128/2), 'whales');
-
-        // add object to the existing scene
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
+        scene.add.existing(this);           // add object to the existing scene
+        scene.physics.add.existing(this);   // add to physics system
         this.setSize(128, 64);
         this.setOffset(32, -8);
         this.setVelocityX(velocity);
@@ -22,10 +21,12 @@ class Whale extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        if(this.newWhale && this.x < game.config.width/2) {
+        if(this.newWhale && this.x < game.config.width/8) {
             this.newWhale = false;
             this.scene.addWhale(this.velocity);
         }
+
+        // destroy whale if it reaches the left edge of the screen
         if(this.x < -this.width) {
             this.destroy();
         }
