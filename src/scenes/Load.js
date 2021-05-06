@@ -30,13 +30,15 @@ class Load extends Phaser.Scene {
         this.load.audio('death', 'dead.wav');
         this.load.audio('over', 'Game_Over_1.wav');
         this.load.audio('pickup', 'pickup.wav');
+        // load atlas asset
+        this.load.atlas('swim', 'swimmer.png', 'swimmer.json');
         // load custom spritesheet
-        this.load.spritesheet('swim', 'Swim_animation_2_320_x_320.png', {
-            frameWidth: 105,
-            frameHeight: 105,
-            startFrame: 0,
-            endFrame: 7
-        });
+        // this.load.spritesheet('swim', 'Swim_animation_2_320_x_320.png', {
+        //     frameWidth: 105,
+        //     frameHeight: 105,
+        //     startFrame: 0,
+        //     endFrame: 7
+        // });
         this.load.spritesheet('bloodExplode', 'blood.png', {
             frameWidth: 64,
             frameHeight: 32,
@@ -47,12 +49,24 @@ class Load extends Phaser.Scene {
 
     create() {
         // animation config
+        // this.anims.create({
+        //     key: 'player',
+        //     frames: this.anims.generateFrameNumbers('swim', {
+        //         start: 0,
+        //         end: 7,
+        //         first: 0
+        //     }),
+        //     repeat: -1,
+        //     frameRate: 10
+        // });
         this.anims.create({
-            key: 'player',
-            frames: this.anims.generateFrameNumbers('swim', {
-                start: 0,
-                end: 7,
-                first: 0
+            key: 'swimming',
+            frames: this.anims.generateFrameNames('swim', {
+                prefix: 'swim/',
+                start: 1,
+                end: 8,
+                suffix: '.png',
+                zeroPad: 4,
             }),
             repeat: -1,
             frameRate: 10

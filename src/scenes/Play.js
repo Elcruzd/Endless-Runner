@@ -36,14 +36,14 @@ class Play extends Phaser.Scene {
         // set up swimmer
         p1Swimmer = this.physics.add.sprite(64, game.config.height/2, 'player').setOrigin(0.5, 0.5);
         p1Swimmer.setSize(128, 32);
-        p1Swimmer.setOffset(-8, 32);
+        p1Swimmer.setOffset(-8, 16);
         p1Swimmer.body.setCollideWorldBounds(true);
         p1Swimmer.setBounce(0.5);
         p1Swimmer.setImmovable();
         p1Swimmer.setMaxVelocity(0, 300);
         p1Swimmer.setDragY(500);
         p1Swimmer.destroyed = false;
-        p1Swimmer.anims.play('player', true);
+        p1Swimmer.anims.play('swimming', true);
 
         // set up shark group
         this.sharkGroup = this.add.group({
