@@ -34,7 +34,7 @@ class Play extends Phaser.Scene {
         this.bgm.play();
 
         // set up swimmer
-        p1Swimmer = this.physics.add.sprite(64, game.config.height/2, 'player').setOrigin(0.5, 0.5);
+        p1Swimmer = this.physics.add.sprite(64, game.config.height/2).setOrigin(0.5, 0.5);
         p1Swimmer.setSize(128, 32);
         p1Swimmer.setOffset(-8, 16);
         p1Swimmer.body.setCollideWorldBounds(true);
