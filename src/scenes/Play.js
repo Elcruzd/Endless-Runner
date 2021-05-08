@@ -191,5 +191,9 @@ class Play extends Phaser.Scene {
             rate: 2,
             loop: false 
         });
+        if(p1Score > 5) {
+            p1Score += 2;
+            this.scoreLeft.text = `Score: ${p1Score}`;
+        }
     }
 }
