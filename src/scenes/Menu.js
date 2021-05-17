@@ -62,6 +62,7 @@ class Menu extends Phaser.Scene {
         })
         // add game instructions
         this.add.text(game.config.width/2, game.config.height/2 + 160, 'PRESS UP & DOWN  ARROWS TO DODGE SHARKS AND WHALES', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 140, 'PICKUP THE SURFBOARD TO GET POINTS', menuConfig).setOrigin(0.5);
         
         // define keys
         // cursors = this.input.keyboard.createCursorKeys();
