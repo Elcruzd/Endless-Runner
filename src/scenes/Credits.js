@@ -2,9 +2,9 @@
 ** Name: Zhendong Jiang - programming, game design
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
-** Porject: Endless Runner
-** Game Title: Sharkbu-Sharkbu
-** Date: May 3, 2021
+** Porject: Final Game:
+** Game Title: 
+** Date: 
 */
 
 class Credits extends Phaser.Scene {
