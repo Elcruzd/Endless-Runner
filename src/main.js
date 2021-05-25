@@ -2,9 +2,16 @@
 ** Name: Zhendong Jiang - programming, game design
 **       Nathan Pon - art, audio assets
 **       Jiahui Li - art, audio assets
-** Porject: Final Game:
-** Game Title: 
-** Date: 
+** Porject: Endless Runner
+** Game Title: Sharkbu-Sharkbu
+** Date: May 3, 2021
+** 
+** Creative Tilt:
+** 
+** A technically interesting of our endless runner is to collect the surfboard you have to dodge the sharks and whales.
+** Zhendong, in particularly proud of is implemented the surfboard as random spawn item and make it to add points.
+** We are proud of the music and art assets that we created.
+** Jiahui and Nathon are proud of background music, record the sound of water by herself, and then make it into background music.
 */
 
 // game configuration

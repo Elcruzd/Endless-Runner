@@ -20,6 +20,14 @@ class Item extends Phaser.Physics.Arcade.Sprite {
     }     
     
     update() {
-      
+        if(this.newItem && this.x < game.config.width/2) {
+            this.newItem = false;
+            this.scene.addItem(this.velocity);
+        }
+
+        // destroy item if it reaches the left edge of the screen
+        if(this.x < -this.width) {
+            this.destroy();
+         }    
     }
 }
