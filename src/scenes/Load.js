@@ -22,7 +22,7 @@ class Load extends Phaser.Scene {
         this.load.image('sea2', 'background4.png');
         this.load.image('sharks', 'SHARK_new.png');
         this.load.image('whales', 'Orca.png');
-        this.load.image('items', 'Surfboard.png');
+        this.load.image('items', 'surfboard.png');
         this.load.image('over', 'gameover.png');
         // load audio asset
         this.load.audio('select', 'select.wav');
